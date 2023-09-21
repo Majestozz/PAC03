@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Character
 
 var _state_machine
 
@@ -47,3 +48,7 @@ func _animate() -> void:
 		return
 			
 	_state_machine.travel("idle")
+
+
+func _on_camera_2d_ready():
+	pass # Replace with function body.
