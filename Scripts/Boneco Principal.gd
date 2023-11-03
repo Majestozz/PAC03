@@ -4,7 +4,7 @@ class_name Character
 var _state_machine
 
 @export_category("variables")
-@export var _move_speed: float = 64.0
+@export var _move_speed: float = 82.0
 
 @export var _friction: float = 0.2
 @export var _acceleration: float = 0.2 

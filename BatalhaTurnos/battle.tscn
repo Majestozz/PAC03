@@ -1,0 +1,483 @@
+[gd_scene load_steps=20 format=3 uid="uid://0w2wehyhbxa2"]
+
+[ext_resource type="Script" path="res://BatalhaTurnos/battle.gd" id="1_f47le"]
+[ext_resource type="Texture2D" uid="uid://c5ldu31ejwrtb" path="res://Battle Backgrounds Pack Files/Battle Backgrounds Pack Files/Desert/layers/all-layers.png" id="1_iu57n"]
+[ext_resource type="FontFile" uid="uid://ukl5mpgmpx4t" path="res://NinjaAdventure/HUD/Font/NormalFont.ttf" id="2_558yy"]
+[ext_resource type="Texture2D" uid="uid://smd1lxs7vdw7" path="res://tiny-rpg-town-files/tiny-rpg-town-files/Battle Sprites/Living/Frog.png" id="2_q6epw"]
+[ext_resource type="Resource" uid="uid://c3ls4wrvatqne" path="res://BatalhaTurnos/Dragon.tres" id="2_xwyw3"]
+
+[sub_resource type="GDScript" id="GDScript_04c04"]
+script/source = "extends TextureRect
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6vjow"]
+bg_color = Color(1, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lhx23"]
+bg_color = Color(0, 1, 0, 1)
+
+[sub_resource type="GDScript" id="GDScript_oqflh"]
+script/source = "
+extends Node
+
+var current_health = 35
+var max_health = 35
+var damage = 30
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k4sf4"]
+bg_color = Color(0, 0, 0, 0.65098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w8wb1"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ona2v"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_im3fv"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Animation" id="Animation_oxafb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemyContainer/Enemy:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/Camera2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("EnemyContainer:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_rv36w"]
+resource_name = "enemy_damaged"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemyContainer/Enemy:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_24xf6"]
+resource_name = "enemy_died"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemyContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_h5owi"]
+resource_name = "mini_shake"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/Camera2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(15, 5), Vector2(-3, 8), Vector2(14, -20), Vector2(0, -3)]
+}
+
+[sub_resource type="Animation" id="Animation_btavw"]
+resource_name = "shake"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/Camera2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-26, -13), Vector2(41, 27), Vector2(-36, 36), Vector2(47, 8), Vector2(1, 1), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ekuxe"]
+_data = {
+"RESET": SubResource("Animation_oxafb"),
+"enemy_damaged": SubResource("Animation_rv36w"),
+"enemy_died": SubResource("Animation_24xf6"),
+"mini_shake": SubResource("Animation_h5owi"),
+"shake": SubResource("Animation_btavw")
+}
+
+[node name="Battle" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 0
+script = ExtResource("1_f47le")
+enemy = ExtResource("2_xwyw3")
+metadata/_edit_use_anchors_ = true
+
+[node name="BackgroundDesert" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -3.0
+offset_top = -53.0
+offset_right = 645.0
+offset_bottom = 313.0
+texture = ExtResource("1_iu57n")
+script = SubResource("GDScript_04c04")
+
+[node name="EnemyContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -90.5
+offset_right = 75.0
+offset_bottom = 90.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="EnemyContainer"]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_6vjow")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lhx23")
+step = 1.0
+value = 50.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="EnemyContainer/ProgressBar"]
+z_as_relative = false
+layout_mode = 0
+offset_left = 36.0
+offset_top = -4.0
+offset_right = 107.0
+offset_bottom = 17.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_558yy")
+theme_override_font_sizes/font_size = 10
+text = "HP: 25/50"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Enemy" type="TextureRect" parent="EnemyContainer"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+texture = ExtResource("2_q6epw")
+stretch_mode = 5
+script = SubResource("GDScript_oqflh")
+
+[node name="PlayerPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -7.0
+offset_top = -51.0
+offset_right = 9.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_k4sf4")
+
+[node name="PlayerData" type="HBoxContainer" parent="PlayerPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 21.0
+offset_right = -21.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="PlayerPanel/PlayerData"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_558yy")
+text = "Player
+"
+
+[node name="ProgressBar" type="ProgressBar" parent="PlayerPanel/PlayerData"]
+custom_minimum_size = Vector2(150, 16)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_6vjow")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lhx23")
+step = 1.0
+value = 50.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="PlayerPanel/PlayerData/ProgressBar"]
+z_as_relative = false
+layout_mode = 0
+offset_left = 36.0
+offset_top = -4.0
+offset_right = 107.0
+offset_bottom = 17.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_558yy")
+theme_override_font_sizes/font_size = 10
+text = "HP: 25/50"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ActionsPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -6.0
+offset_top = -3.0
+offset_right = 8.0
+offset_bottom = 30.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_k4sf4")
+
+[node name="Actions" type="HBoxContainer" parent="ActionsPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 99.0
+offset_top = 5.0
+offset_right = -105.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="Ataque" type="Button" parent="ActionsPanel/Actions"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_558yy")
+theme_override_styles/normal = SubResource("StyleBoxFlat_w8wb1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ona2v")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ona2v")
+text = "ATAQUE"
+
+[node name="Defender" type="Button" parent="ActionsPanel/Actions"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_558yy")
+theme_override_styles/normal = SubResource("StyleBoxFlat_w8wb1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ona2v")
+text = "ARMADURA
+"
+
+[node name="TextBox" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 22.0
+offset_right = -20.0
+offset_bottom = 64.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_im3fv")
+
+[node name="Label" type="Label" parent="TextBox"]
+layout_mode = 0
+offset_left = 150.0
+offset_top = 17.0
+offset_right = 455.0
+offset_bottom = 42.0
+theme_override_fonts/font = ExtResource("2_558yy")
+text = "É    Um   Sapo   Do   Deserto!!!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="TextBox"]
+layout_mode = 0
+offset_left = 583.0
+offset_top = 39.0
+offset_right = 857.0
+offset_bottom = 64.0
+theme_override_fonts/font = ExtResource("2_558yy")
+text = ">"
+
+[node name="Perguntas" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -6.0
+offset_top = -3.0
+offset_right = 8.0
+offset_bottom = 30.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_k4sf4")
+metadata/_edit_use_anchors_ = true
+
+[node name="BoxPerguntas" type="Panel" parent="Perguntas"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 22.0
+offset_right = -20.0
+offset_bottom = 64.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_im3fv")
+
+[node name="Label" type="Label" parent="Perguntas/BoxPerguntas"]
+layout_mode = 0
+offset_left = 160.0
+offset_top = -9.0
+offset_right = 481.0
+offset_bottom = 66.0
+theme_override_fonts/font = ExtResource("2_558yy")
+text = "Qual  é  a  linguagem  principal  usada
+ para  criar  a  estrutura 
+de  uma  página  web?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Actions" type="HBoxContainer" parent="Perguntas"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 99.0
+offset_top = 5.0
+offset_right = -105.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="Resposta1" type="Button" parent="Perguntas/Actions"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_558yy")
+theme_override_styles/normal = SubResource("StyleBoxFlat_w8wb1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ona2v")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ona2v")
+text = "CSS"
+
+[node name="Resposta2" type="Button" parent="Perguntas/Actions"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_558yy")
+theme_override_styles/normal = SubResource("StyleBoxFlat_w8wb1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ona2v")
+text = "HTML
+"
+
+[node name="Resposta3" type="Button" parent="Perguntas/Actions"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_558yy")
+theme_override_styles/normal = SubResource("StyleBoxFlat_w8wb1")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ona2v")
+text = "Javascript
+"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ekuxe")
+}
+
+[node name="Camera2D" type="Camera2D" parent="AnimationPlayer"]
+anchor_mode = 0
+
+[connection signal="pressed" from="ActionsPanel/Actions/Ataque" to="." method="_on_ataque_pressed"]
+[connection signal="pressed" from="ActionsPanel/Actions/Defender" to="." method="_on_defender_pressed"]
+[connection signal="pressed" from="Perguntas/Actions/Resposta1" to="." method="_on_ataque_pressed"]
+[connection signal="pressed" from="Perguntas/Actions/Resposta2" to="." method="_on_defender_pressed"]
+[connection signal="pressed" from="Perguntas/Actions/Resposta3" to="." method="_on_defender_pressed"]

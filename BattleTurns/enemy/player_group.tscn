@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://477utu48ujb3"]
+
+[ext_resource type="PackedScene" uid="uid://cjigsrkvg5cex" path="res://BattleTurns/enemy/character.tscn" id="1_77pkh"]
+[ext_resource type="Script" path="res://BattleTurns/enemy/player_group.gd" id="1_d5iah"]
+[ext_resource type="Texture2D" uid="uid://bsgn7m3awv765" path="res://assets/elf_f_idle_anim_f0.png" id="2_1druy"]
+[ext_resource type="Texture2D" uid="uid://doyl5sufbsbo8" path="res://assets/knight_f_idle_anim_f0.png" id="3_87t8l"]
+
+[node name="PlayerGroup" type="Node2D"]
+script = ExtResource("1_d5iah")
+
+[node name="Character2" parent="." instance=ExtResource("1_77pkh")]
+
+[node name="Sprite2D" parent="Character2" index="0"]
+position = Vector2(-0.25, 0)
+texture = ExtResource("3_87t8l")
+flip_h = true
+hframes = 1
+vframes = 1
+frame = 0
+
+[node name="Character" parent="." instance=ExtResource("1_77pkh")]
+
+[node name="Sprite2D" parent="Character" index="0"]
+texture = ExtResource("2_1druy")
+flip_h = true
+hframes = 1
+vframes = 1
+frame = 0
+
+[editable path="Character2"]
+[editable path="Character"]

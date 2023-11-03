@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cdctgej5ucehm"]
+
+[ext_resource type="Script" path="res://EnemyGroup.gd" id="1_q1iho"]
+[ext_resource type="PackedScene" uid="uid://cjigsrkvg5cex" path="res://BattleTurns/enemy/character.tscn" id="2_fylx8"]
+
+[node name="EnemyGroup" type="Node2D"]
+position = Vector2(110, 88)
+script = ExtResource("1_q1iho")
+
+[node name="Character" parent="." instance=ExtResource("2_fylx8")]
+
+[node name="Character2" parent="." instance=ExtResource("2_fylx8")]
+
+[node name="Character3" parent="." instance=ExtResource("2_fylx8")]

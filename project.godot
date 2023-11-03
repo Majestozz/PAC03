@@ -15,6 +15,10 @@ run/main_scene="res://levels.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+State="*res://BatalhaTurnos/State.gd"
+
 [display]
 
 window/size/viewport_width=640
@@ -50,4 +54,8 @@ move_down={
 
 [rendering]
 
+anti_aliasing/quality/msaa_2d=1
+anti_aliasing/quality/msaa_3d=1
+anti_aliasing/quality/screen_space_aa=1
+anti_aliasing/quality/use_taa=true
 textures/canvas_textures/default_texture_filter=0

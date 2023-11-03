@@ -1,0 +1,11 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://c3ls4wrvatqne"]
+
+[ext_resource type="Script" path="res://BatalhaTurnos/BaseEnemy.gd" id="1_5guam"]
+[ext_resource type="Texture2D" uid="uid://smd1lxs7vdw7" path="res://tiny-rpg-town-files/tiny-rpg-town-files/Battle Sprites/Living/Frog.png" id="2_80pl1"]
+
+[resource]
+script = ExtResource("1_5guam")
+name = "Enemy"
+texture = ExtResource("2_80pl1")
+health = 45
+damage = 15

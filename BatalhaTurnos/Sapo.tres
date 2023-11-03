@@ -1,0 +1,7 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bha165umcx0xl"]
+
+[ext_resource type="Script" path="res://BatalhaTurnos/BaseEnemy.gd" id="1_bqjdd"]
+
+[resource]
+resource_name = "Sapo"
+script = ExtResource("1_bqjdd")
